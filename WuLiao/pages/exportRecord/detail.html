@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>供应商管理</title>
+    <link rel="stylesheet" href="../../static/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../static/bower_components/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../static/bower_components/Ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="../../static/dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="../../static/dist/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="../../static/dist/css/bootstrap-treeview.min.css">
+    <link rel="stylesheet" href="../../static/bower_components/bootstrap-table/dist/bootstrap-table.css">
+    <link rel="stylesheet" href="../../static/bower_components/bootstrap-fileinput/css/fileinput.css" />
+    <link rel="stylesheet" href="../../static/dist/css/scollstyle.css">
+    <link rel="stylesheet" href="../../css/common.css" />
+    <script src="../../static/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../../static/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../../static/bower_components/bootstrap-table/dist/bootstrap-table.js"></script>
+    <script src="../../static/bower_components/bootstrap-table/dist/bootstrap-table-locale-all.min.js"></script>
+    <script src="../../static/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="../../static/dist/js/adminlte.min.js"></script>
+    <script src="../../static/dist/js/bootstrap-treeview.min.js"></script>
+    <script src="../../static/bower_components/bootstrap-fileinput/js/fileinput.js"></script>
+    <script src="../../static/bower_components/bootstrap-fileinput/js/locales/zh.js"></script>
+    <script type="text/javascript" src="../../static/bower_components/bootstrap-contextmenu/bootstrap-contextmenu.js"></script>
+    <script type="text/javascript" src="../../static/dist/js/pack/tabsetting.js"></script>
+    <script type="text/javascript" src="../../static/dist/layer/layer.js"></script>
+    <script type="text/javascript" src="../../static/dist/laydate/laydate.js"></script>
+    <script type="text/javascript" src="../../js/common.js"></script>
+    <style>
+        .treeview span.icon{
+            font-size: 20px;
+        }
+        
+
+        .panel.panel-default::-webkit-scrollbar {  /* 滚动条整体部分 */
+            width:4px;
+            margin-right:2px
+        }
+        .panel.panel-default::-webkit-scrollbar-button { /* 滚动条两端的按钮 */
+            width:4px;
+            background-color: #fff;
+        }
+        .panel.panel-default::-webkit-scrollbar:horizontal {
+            height:5px;
+            margin-bottom:2px
+        }
+        .panel.panel-default::-webkit-scrollbar-track {  /* 外层轨道 */
+            border-radius: 2px;
+        }
+        .panel.panel-default::-webkit-scrollbar-track-piece {  /*内层轨道，滚动条中间部分 */
+            background-color:#EDF2F8;
+            border-radius: 2px;
+        }
+        .panel.panel-default::-webkit-scrollbar-thumb {  /* 滑块 */
+            width:4px;
+            border-radius: 2px;
+            background: #27AAE1;
+        }
+        .panel.panel-default::-webkit-scrollbar-corner { /* 边角 */
+            width: 4px;
+            background-color: red;
+        }
+        .panel.panel-default::-webkit-scrollbar-thumb:hover { /* 鼠标移入滑块 */
+            background: #27AAE1;
+        }
+        .list-group-item.node-tree{
+            border: none;
+        }
+        .list-group-item.node-tree{
+            padding: 0px;
+        }
+        .node-selected{
+            color: #000!important;
+            font-weight: 700!important;
+            background-color: #fff!important;
+        }
+        .icon.expand-icon.glyphicon.glyphicon-plus{
+            margin-left: 3px;
+        }
+        .columns.columns-right.btn-group.pull-right {
+            margin-top: 15px;
+        }
+       
+        
+        .bs-bars.pull-left{
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+
+        .columns.columns-right.btn-group.pull-right{display: none !important;}
+
+        .fixed-table-container{height: 210px;}
+        .fixed-table-toolbar{display: none;}
+        #formSearch{margin-bottom: 10px;}
+        .form-control[readonly] {background: #fff;border: none;}
+        .form-control{height: auto;margin: 0;padding: 0;}
+
+        .time-line{background: #F8F8F8;border: 1px solid #DFDFDF;padding: 10px 10px 0 100px;}
+        .time-line li{position: relative;padding-left: 20px;}
+        .time-line li .time{font-size: 12px;color: #999;margin-left: 50px;}
+        .time-line li .status{color: #27AAE1;}
+        .time-line li.on .status{color: #F75C5C;}
+        .time-line li.on .status .reason{font-size: 12px;background: #E6E6E6;padding: 4px 8px;display: inline-block;margin-left: 20px;}
+        .time-line li.on:before{background: #F75C5C;}
+        .time-line li:before{content: '';position: absolute;width: 8px;height: 8px;background: #27AAE1;border-radius: 50%;left: 0;top: 5px;z-index: 2;}
+        .time-line li:last-child:after{display: none;}
+        .time-line li:after{content: '';position: absolute;width: 1px;height: 60px;background: #ccc;left: 3px;top: 10px;}
+        body{background: #fff;overflow: auto;}
+        label{margin-bottom: 0;width: 70px;text-align: right;}
+        .form-inline{display: inline-block;padding: 5px;}
+
+        .upload{position: relative;}
+        .upload input[type=file]{position: absolute;opacity: 0;width: 100%;height: 100%;left: 0;top: 0;font-size: 0;cursor: pointer;}
+    
+    </style>
+</head>
+
+<body>
+    <div id="content" class="row-fluid" style="height:100%;">
+        <div class="col-md-12 col-xs-12" style="background-color: #fff;">
+            <div class="panel-body" style="margin: 0;padding: 0">
+                <div id="formSearch" class="form-inine clearfix">
+                    <div class="form-inline">
+                        <div style="margin-bottom: 4px;">
+                            <label>申请人员：</label>
+                            <input readonly type="text" name="username" class="form-control" value="张三">
+                            <label>申请部门：</label>
+                            <input readonly type="text" name="" class="form-control" value="技术部">
+                        </div>
+                        <div>
+                            <label>申请单号：</label>
+                            <input readonly type="text" name="" class="form-control" value="123456789">
+                            <label>申请日期：</label>
+                            <input readonly type="text" name="" class="form-control" value="2019-01-01">
+                        </div>
+                    </div>
+                </div>
+                <!-- 表格工具栏 -->
+                <div id="toolbar" class="btn-group">
+                    <!-- <button id="btn_add" type="button" class="btn btn-primary">添加</button>
+                    <button id="btn_delete" type="button" class="btn btn-danger del">删除</button> -->
+                </div>
+                <!-- 数据表格 -->
+                <table id="tb_departments"></table>
+            </div>
+        </div>
+    </div>
+    <script src="../../static/dist/js/byx_style.js"></script>
+    <script src="./detail.js"></script>
+    <script type="text/javascript">
+    </script>
+</body>
+
+</html>

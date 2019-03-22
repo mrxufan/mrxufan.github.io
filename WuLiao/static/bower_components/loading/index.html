@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>jQuery Loading效果插件shCircleLoader演示_dowebok</title>
+<style>
+.demo { width: 700px; margin: 0 auto;}
+.demo h2 { margin-bottom:  15px; padding-bottom: 8px; border-bottom: 1px solid #ccc; font: 18px "Microsoft Yahei"; text-align: center;}
+.loading { width: 152px; height: 152px; margin: 0 auto;}
+.myns > div { box-shadow: 0 0 6px black, inset 0 0 6px black;}
+hr { margin: 50px 0;}
+</style>
+</head>
+
+<body>
+<h1>jQuery Loading效果插件shCircleLoader演示</h1>
+
+<hr>
+
+<!-- Demo start  -->
+<div class="demo">
+	<h2>1、默认</h2>
+	<div class="loading loading1"></div>
+</div>
+
+<hr>
+
+<div class="demo">
+	<h2>2、逆时针</h2>
+	<div class="loading loading2"></div>
+</div>
+
+<hr>
+
+<div class="demo">
+	<h2>3、自定义颜色</h2>
+	<div class="loading loading3"></div>
+</div>
+</div>
+
+<hr>
+
+<div class="demo">
+	<h2>4、持续时间</h2>
+	<div class="loading loading4"></div>
+</div>
+
+<hr>
+
+<div class="demo">
+	<h2>5、圆点个数及大小</h2>
+	<div class="loading loading5"></div>
+</div>
+
+<hr>
+
+<div class="demo">
+	<h2>6、圆点动画</h2>
+	<div class="loading loading6"></div>
+</div>
+
+<hr>
+
+<div class="demo">
+	<h2>7、命名空间</h2>
+	<div class="loading loading7"></div>
+</div>
+
+<hr>
+
+<div class="demo">
+	<h2>8、火球效果</h2>
+	<div class="loading loading8"></div>
+</div>
+
+<hr>
+
+<div class="demo">
+	<h2>9、进度状态</h2>
+	<div class="loading loading9"></div>
+</div>
+<!-- Demo end -->
+
+<p class="vad">
+	<a href="http://www.dowebok.com/" target="_blank">dowebok.com</a>
+	<a href="http://www.dowebok.com/117.html" target="_blank">说 明</a>
+	<a href="http://www.dowebok.com/117.html" target="_blank">下 载</a>
+</p>
+
+<script src="js/jquery-1.8.3.min.js"></script>
+<script src="js/jquery.shCircleLoader.js"></script>
+<script>
+$(function(){
+	$('.loading1').shCircleLoader();
+	$('.loading2').shCircleLoader({
+		clockwise: false
+	});
+	$('.loading3').shCircleLoader({
+		color: '#f00'
+	});
+	$('.loading4').shCircleLoader({
+		duration: 2
+	});
+	$('.loading5').shCircleLoader({
+		dots: 24,
+		dotsRadius: 10
+	});
+	$('.loading6').shCircleLoader({
+		keyframes:
+			'0%   {background:black}\
+			40%  {background:transparent}\
+			60%  {background:transparent}\
+			100% {background:black}'
+	});
+	$('.loading7').shCircleLoader({
+		namespace: 'myns',
+		color: 'transparent',
+		dotsRadius: 15
+	});
+	$('.loading8').shCircleLoader({
+		color: 'red',
+		dots: 24,
+		dotsRadius: 13,
+		keyframes:
+			'0%   {background: red;    {prefix}transform: scale(1)}\
+			20%  {background: orange; {prefix}transform: scale(.4)}\
+			40%  {background: red;    {prefix}transform: scale(0)}\
+			50%  {background: red;    {prefix}transform: scale(1)}\
+			70%  {background: orange; {prefix}transform: scale(.4)}\
+			90%  {background: red;    {prefix}transform: scale(0)}\
+			100% {background: red;    {prefix}transform: scale(1)}'
+	});
+	$('.loading9').shCircleLoader();
+	var i = 0;
+	setInterval(function() {
+		$('.loading9').shCircleLoader('progress', i + '%');
+		if (++i > 100) i = 0;
+	}, 100);
+});
+</script>
+
+
+
+
+
+
+
+
+
+<!-- 以下是统计及其他信息，与演示无关，不必理会 -->
+<style>
+* { margin: 0; padding: 0;}
+body { font-family: Consolas,arial,"宋体";}
+h1 { width: 900px; margin: 40px auto; font: 32px "Microsoft Yahei"; text-align: center;}
+.explain, .dowebok-explain { margin-top: 20px; font-size: 14px; text-align: center; color: #f50;}
+
+.vad { margin: 50px 0 5px; font-family: Consolas,arial,宋体; text-align:center;}
+.vad a { display: inline-block; height: 36px; line-height: 36px; margin: 0 5px; padding: 0 50px; font-size: 14px; text-align:center; color:#eee; text-decoration: none; background-color: #222;}
+.vad a:hover { color: #fff; background-color: #000;}
+.thead { width: 728px; height: 90px; margin: 0 auto; border-bottom: 40px solid #fff;}
+
+.code { position: relative; margin-top: 100px; padding-top: 41px;}
+.code h3 { position: absolute; top: 0; z-index: 10; width: 100px; height: 40px; font: 16px/40px "Microsoft Yahei"; text-align: center; cursor: pointer;}
+.code .cur { border: 1px solid #f0f0f0; border-bottom: 1px solid #f8f8f8; background-color: #f8f8f8;}
+.code .h31 { left: 0;}
+.code .h32 { left: 102px;}
+.code .h33 { left: 204px;}
+.code .h34 { left: 306px;}
+.code { width: 900px; margin-left: auto; margin-right: auto;}
+pre { padding: 15px 0; border: 1px solid #f0f0f0; background-color: #f8f8f8;}
+.f-dn { display: none;}
+</style>
+
+</body>
+</html>

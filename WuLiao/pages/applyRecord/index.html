@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>供应商管理</title>
+    <link rel="stylesheet" href="../../static/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../static/bower_components/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../static/bower_components/Ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="../../static/dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="../../static/dist/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="../../static/dist/css/bootstrap-treeview.min.css">
+    <link rel="stylesheet" href="../../static/bower_components/bootstrap-table/dist/bootstrap-table.css">
+    <link rel="stylesheet" href="../../static/bower_components/bootstrap-fileinput/css/fileinput.css" />
+    <link rel="stylesheet" href="../../static/dist/css/scollstyle.css">
+    <link rel="stylesheet" href="../../css/common.css" />
+    <script src="../../static/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../../static/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../../static/bower_components/bootstrap-table/dist/bootstrap-table.js"></script>
+    <script src="../../static/bower_components/bootstrap-table/dist/bootstrap-table-locale-all.min.js"></script>
+    <script src="../../static/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="../../static/dist/js/adminlte.min.js"></script>
+    <script src="../../static/dist/js/bootstrap-treeview.min.js"></script>
+    <script src="../../static/bower_components/bootstrap-fileinput/js/fileinput.js"></script>
+    <script src="../../static/bower_components/bootstrap-fileinput/js/locales/zh.js"></script>
+    <script type="text/javascript" src="../../static/bower_components/bootstrap-contextmenu/bootstrap-contextmenu.js"></script>
+    <script type="text/javascript" src="../../static/dist/js/pack/tabsetting.js"></script>
+    <script type="text/javascript" src="../../static/dist/layer/layer.js"></script>
+    <script type="text/javascript" src="../../static/dist/laydate/laydate.js"></script>
+    <script type="text/javascript" src="../../js/common.js"></script>
+    <style>
+        .treeview span.icon{
+            font-size: 20px;
+        }
+        
+
+        .panel.panel-default::-webkit-scrollbar {  /* 滚动条整体部分 */
+            width:4px;
+            margin-right:2px
+        }
+        .panel.panel-default::-webkit-scrollbar-button { /* 滚动条两端的按钮 */
+            width:4px;
+            background-color: #fff;
+        }
+        .panel.panel-default::-webkit-scrollbar:horizontal {
+            height:5px;
+            margin-bottom:2px
+        }
+        .panel.panel-default::-webkit-scrollbar-track {  /* 外层轨道 */
+            border-radius: 2px;
+        }
+        .panel.panel-default::-webkit-scrollbar-track-piece {  /*内层轨道，滚动条中间部分 */
+            background-color:#EDF2F8;
+            border-radius: 2px;
+        }
+        .panel.panel-default::-webkit-scrollbar-thumb {  /* 滑块 */
+            width:4px;
+            border-radius: 2px;
+            background: #27AAE1;
+        }
+        .panel.panel-default::-webkit-scrollbar-corner { /* 边角 */
+            width: 4px;
+            background-color: red;
+        }
+        .panel.panel-default::-webkit-scrollbar-thumb:hover { /* 鼠标移入滑块 */
+            background: #27AAE1;
+        }
+        .list-group-item.node-tree{
+            border: none;
+        }
+        .list-group-item.node-tree{
+            padding: 0px;
+        }
+        .node-selected{
+            color: #000!important;
+            font-weight: 700!important;
+            background-color: #fff!important;
+        }
+        .icon.expand-icon.glyphicon.glyphicon-plus{
+            margin-left: 3px;
+        }
+        .columns.columns-right.btn-group.pull-right {
+            margin-top: 15px;
+        }
+       
+        
+        .bs-bars.pull-left{
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .form-control[readonly]{background: #fff;}
+
+    </style>
+</head>
+
+<body>
+    <div id="content" class="row-fluid" style="height:100%;">
+        <!-- <div class="col-md-2 col-xs-2" id="panel_organize" style="padding: 0;margin-top: 10px;">
+            <div class="panel-body" style="height: 100%;margin: 0;padding: 0;padding-right: 10px;">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div id="tree"></div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <div class="col-md-12 col-xs-12" style="background-color: #fff;margin-top: 10px;margin-left: 10px;">
+            <div class="panel-body" style="margin: 0;padding: 0">
+                <div id="formSearch" class="form-inine clearfix">
+                    <div class="form-inline">
+                        <label>工号</label>
+                        <input type="text" name="" class="form-control">
+                        <label>申请人</label>
+                        <select class="form-control">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                        <!-- <div style="margin-top: 10px;"></div> -->
+                        <label>日期</label>
+                        <input id="timeRange" readonly type="text" name="" class="form-control">
+                        <label>状态</label>
+                        <select class="form-control">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                        <span class="btn-group">
+                            <a class="btn btn-primary" href="javascript:;" onclick="searchBtn()">查询</a>
+                            <a class="btn btn-default" href="javascript:;" onclick="resetBtn()">重置</a>
+                        </span>
+                    </div>
+                </div>
+                <!-- 表格工具栏 -->
+                <div id="toolbar" class="btn-group">
+                   <!--  <button id="btn_add" type="button" class="btn btn-primary">添加</button>
+                    <button id="btn_edit" type="button" class="btn btn-primary">修改</button>
+                    <button id="btn_delete" type="button" class="btn btn-danger del">删除</button>
+                    <button id="btn_submit" type="button" class="btn btn-primary">提交</button> -->
+                    <button id="btn_export" type="button" class="btn btn-primary">导出</button>
+                    <button id="btn_submit" type="button" class="btn btn-primary">打印</button>
+                </div>
+                <!-- 数据表格 -->
+                <table id="tb_departments"></table>
+            </div>
+        </div>
+    </div>
+    <!-- 数据表格详情弹窗 -->
+    <!-- <div class="detail-layer">
+        <ul class="clearfix">
+            <li><span>上级机构：</span>教务处</li>
+            <li><span>编号：</span>教务处</li>
+            <li><span>机构名称：</span>教务处</li>
+            <li><span>负责人：</span>教务处</li>
+            <li><span>机构简称：</span>教务处</li>
+            <li><span>联系电话：</span>教务处</li>
+            <li><span>备注：</span>教务处</li>
+        </ul>
+    </div> -->
+    <script src="../../static/dist/js/byx_style.js"></script>
+    <script src="./index.js"></script>
+    <script type="text/javascript">
+    laydate.render({
+        elem: '#timeRange',
+        range: true
+    });
+    </script>
+</body>
+
+</html>

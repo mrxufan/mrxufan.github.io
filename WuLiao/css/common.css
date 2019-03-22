@@ -1,0 +1,341 @@
+label {
+    color: #525664 !important;
+    font-weight: 400;
+    font-family: Microsoft YaHei;
+    position: relative;
+}
+
+input {
+    color: #5F6F87 !important;
+    padding-left: 6px !important;
+}
+
+.form-control[readonly]{background: #f8f8f8;}
+
+select {
+    outline: none;
+    border-color: #d2d6de;
+}
+
+.icon.expand-icon {
+    font-family: none;
+    font-weight: 700;
+}
+
+/*分页*/
+.pagination {
+    float: left !important;
+}
+
+.pagination-detail {
+    display: none;
+}
+
+.columns.columns-right.btn-group.pull-right {
+    margin-top: 10px;
+}
+
+.btn.btn-default {
+    margin-top: 0px !important;
+}
+
+.keep-open.btn-group {
+    padding-top: 0px !important;
+}
+
+.bs-bars.pull-left {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+/*表单样式*/
+td {
+    color: #5f6f87;
+    font-size: 14px;
+}
+
+thead {
+    background-color: #f4f4f5;
+}
+
+.th-inner {
+    color: #525664;
+}
+
+.list-group-item.node-tree {
+    color: #525664;
+}
+
+.icon.expand-icon {
+    color: #525664;
+}
+
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+input[type="number"]{
+    -moz-appearance: textfield;
+}
+
+/*复选框*/
+input[type=checkbox] {
+    margin-right: 5px;
+    width: 16px;
+    height: 16px;
+}
+
+input[type=checkbox]:after {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    content: " ";
+    background-color: #fdfdfd;
+    color: #000000;
+    display: inline-block;
+    visibility: visible;
+    border-radius: 2px;
+    border: 1px solid #cecece;
+}
+
+input[type=checkbox]:checked:after {
+    content: "\2714";
+    font-size: 12px;
+    font-weight: bold;
+    background-color: #F8A821;
+    color: #fff;
+    height: 16px;
+    width: 16px;
+    line-height: 17px;
+    border: 1px solid #f8a821;
+    padding-left: 2px;
+}
+
+/*添加*/
+.modal-header {
+    background-color: #f8f8f8;
+    height: 42px;
+}
+
+.modal-header h4 {
+    color: #333333;
+    font-size: 14px;
+    margin-top: -3px;
+    font-weight: bolder;
+    font-family: Microsoft YaHei;
+}
+
+.modal-body {
+    margin-top: 14px;
+}
+
+.modal-body .form-group>div:first-of-type {
+
+    color: #525664;
+}
+
+.modal-body .form-group div:nth-of-type(2) {
+    color: #5F6F87;
+}
+
+.modal-body .select2.select2-container.select2-container--default.select2-container--focus {
+    width: 100% !important;
+}
+
+.modal-body .select2.select2-container.select2-container--default.select2-container--below.select2-container--open {
+    width: 100% !important;
+}
+
+.modal-body .select2.select2-container.select2-container--default.select2-container--below {
+    width: 100% !important;
+}
+
+.modal-body .select2.select2-container.select2-container--default {
+    width: 100% !important;
+}
+
+.select2-selection.select2-selection--single {
+    height: 34px;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+    padding-left: 6px;
+
+}
+
+.select2-selection__rendered {
+    color: #5f6f87 !important;
+    padding-left: 0px !important;
+}
+
+.modal-footer {
+    text-align: center;
+    margin-top: 20px;
+    padding-bottom: 40px;
+    border-top: none;
+}
+
+/*消除默认的框*/
+.panel.panel-default {
+    border: none;
+    -webkit-box-shadow: 0 0px 0px rgba(1, 1, 1, 1);
+    box-shadow: 0 0px 0px rgba(1, 1, 1, 1);
+}
+
+body {
+    overflow: hidden;
+    background-color: #F0F3FA;
+
+}
+
+/*刷新旁边的下拉框*/
+.keep-open.btn-group .btn {
+    background-color: rgb(255, 255, 255);
+    width: 45px;
+    height: 26px;
+    border: 1px solid rgb(39, 170, 225);
+    border-radius: 2px;
+    padding: 4px;
+}
+
+.keep-open.btn-group .icon-th {
+    color: rgb(39, 170, 225);
+}
+
+.keep-open.btn-group .caret {
+    color: rgb(39, 170, 225);
+    display: none;
+}
+
+textarea {
+    padding-left: 6px;
+    resize: none;
+    border-color: #d2d6de;
+    outline: none;
+}
+
+.swal-footer {
+    text-align: center;
+}
+
+/*!*提示框样式*!*/
+.tip {
+    background-color: #f8f8f8 !important;
+    height: 42px !important;
+    position: relative !important;
+}
+
+.tip-item {
+    color: #333333;
+    font-size: 14px;
+    font-weight: bolder;
+    font-family: Microsoft YaHei;
+    position: absolute;
+    top: 3px;
+    left: 11px;
+}
+
+html {
+    height: 100% !important;
+}
+
+body {
+    height: 100% !important;
+}
+
+.table-striped>tbody>tr:nth-of-type(even) {
+    background-color: #f9f9f9;
+}
+
+.table-striped>tbody>tr:nth-of-type(odd) {
+    background-color: #fff;
+}
+
+#panel_organize {
+    height: 100%;
+}
+
+.panel.panel-default {
+    height: 100%;
+    overflow: auto;
+}
+
+
+.bs-bars.pull-left {
+    clear: both;
+}
+
+.clearfix:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.pagination>.active>a,
+.pagination>.active>a:hover {
+    background-color: #F8A821;
+    border-color: #F8A821;
+}
+
+.must-star {
+    color: #D42222;
+    position: absolute;
+    left: -12px;
+}
+
+#toolbar .btn {
+    padding: 2px;
+    height: 26px;
+    color: #27aae1;
+    margin-right: 10px;
+    border-radius: 2px;
+    background-color: #FFFFFF;
+    border: 1px solid #27aae1;
+    padding: 0 15px;
+}
+
+#toolbar .btn.del {
+    border: 1px solid #FF4848;
+    color: #FF4848;
+}
+
+#table-tips {
+    text-align: right;
+    color: #FF4848;
+}
+
+.table-layer label {
+    height: 33px;
+    line-height: 33px;
+}
+
+
+
+.btn-primary {
+    width: auto;
+}
+
+.panel-body {
+    padding-top: 10px;
+}
+
+#formSearch{margin-top: 10px;}
+#formSearch .form-control{width: 175px;outline: none;margin-right: 10px;margin-left: 4px;}
+#formSearch .btn{padding: 0 15px;height: 32px;line-height: 32px;margin-right: 6px;}
+#formSearch .btn-default{width: auto;}
+
+ul{margin: 0;padding: 0;list-style: none;}
+.table>tbody>tr>td{vertical-align: middle;}
+
+.btn-group>.btn:first-child:not(:last-child):not(.dropdown-toggle) {
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+.btn-group>.btn:last-child:not(:first-child), .btn-group>.dropdown-toggle:not(:first-child) {
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+.btn-default{border: 1px solid #ccc;background: #fff;color: #666;}
+#canvas{cursor: pointer;position: absolute;right: 0;top: 0;background: #eee;}
