@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+<title>卫生检查</title>
+<link rel="stylesheet" type="text/css" href="iconfont/iconfont.css"> 
+<link rel="stylesheet" type="text/css" href="jquery-weui/css/weui.min.css">
+<link rel="stylesheet" type="text/css" href="jquery-weui/css/jquery-weui.min.css">
+<link rel="stylesheet" type="text/css" href="css/page.css">
+<style type="text/css">
+.weui-cell{padding:.15rem;}
+
+.ws-nav{height: .45rem;background: #fff;line-height: .45rem;display: flex;}
+.ws-nav a{flex:1;text-align: center;color: #666;}
+.ws-nav a.active{position: relative;color: #07CED5;}
+.ws-nav a.active:after{content: '';position: absolute;width: .3rem;height: .03rem;background: #07CED5;left: 50%;bottom: 0;display: block;transform: translateX(-50%);}
+
+.select-area{height: .4rem;background: #fff;display: flex;border-top: .01rem solid #eee;}
+.select-area a{line-height: .4rem;text-align: center;flex:1;color: #666;}
+.select-area a span{position: relative;bottom: .02rem;}
+.select-area a .iconfont{color: #07CED5;font-size: .18rem;}
+
+
+.ws-select-layer{position: fixed;width: 100%;height: 100%;left: 0;top: 0;background: rgba(0, 0, 0, .6);align-items: center;z-index: 10;display: none;}
+.ws-select-layer .main{position: absolute;background: #fff;width: 60%;height: 2rem;border-radius: .04rem;left: 50%;top: 50%;transform: translate(-50%,-50%);padding: .1rem;overflow-y: auto;}
+.ws-select-layer .main li{border-bottom: .01rem solid #eee;padding: .1rem 0;text-align: center;font-size: .15rem;color: #666;}
+
+.tiaosu-list .weiji-wrap{margin-top: -.05rem;display: none;}
+.weiji-wrap{display: block;}
+.weiji-wrap textarea{border: .01rem solid #eee;padding: .05rem;box-sizing: border-box;}
+.weiji-wrap .tit{margin: .05rem 0;}
+.weiji-wrap li{position: relative;padding-left: .3rem;}
+.weiji-wrap input[type='checkbox']{position: absolute;width: .22rem;height: .22rem;border: .01rem solid #C6C6C6;left: 0;top: 0;}
+.weiji-wrap input[type='checkbox']:checked{border-color: #FF966F;}
+.weiji-wrap input[type='checkbox']:checked::after{content: '';position: absolute;width: .16rem;height: .16rem;background: #FF966F;left: .02rem;top: .02rem;}
+
+.wj-layer{margin-top: .2rem;}
+.wj-layer input{width: .18rem;height: .18rem;border: .01rem solid #ccc;border-radius: 50%;vertical-align: bottom;margin-right: .05rem;position: relative;}
+.wj-layer input:checked:after{content: '';position: absolute;width: .12rem;height: .12rem;background: #07CED5;border-radius: 50%;left: .02rem;top: .02rem;}
+.wj-layer label{margin-right: .1rem;}
+
+.is-rule li.active{color: #07CED5;}
+
+.score-layer .main{height: 3.5rem;width: 80%;padding: 0;}
+.score-layer .score-tit{border-bottom: .01rem solid #eee;padding: .1rem .2rem;}
+.score-layer .main li{text-align: left;padding: .1rem .2rem;border-bottom: none;font-size: .12rem;}
+.score-layer .main .score-btn{position: absolute;width: 100%;bottom: 0;left: 0;display: flex;border-top: .01rem solid #E1E1E1;}
+.score-layer .main .score-btn a{flex:1;text-align: center;padding: .1rem 0;}
+.score-layer .main .score-btn a:active{background: #f9f9f9;}
+.score-layer .main .score-btn a.cancel{color: #AAAAAA;border-right: .01rem solid #E1E1E1;}
+.score-layer .main .score-btn a.sure{color: #07CED5;}
+.score-layer .score{color: #FF966F;}
+.score-layer li.active,.score-layer .all-select.active{color: #07CED5;}
+
+.upload-add{position: relative;width: .7rem;height: .7rem;background: url('images/upload.png') no-repeat center center;background-size: cover;float: left;}
+
+.weui-uploader__file{width: .7rem;height: .7rem;margin-right: .16rem;margin-bottom: .16rem;}
+
+.weui-uploader__files li:nth-child(4){margin-right: 0;}
+</style>
+</head>
+<body>
+<div class="ws-nav">
+  <a href="javascript:;" class="active">公寓检查</a>
+  <a href="javascript:;">检查记录</a>
+  <a href="javascript:;">违章记录</a>
+</div>
+<div class="select-area">
+  <a href="javascript:;" class="select-schoolarea"><span id="area">校区</span><i class="iconfont iconjiantou_down"></i></a>
+  <a href="javascript:;" class="select-build"><span id="build">楼宇</span><i class="iconfont iconjiantou_down"></i></a>
+  <a href="javascript:;" class="select-floor"><span id="floor">楼层</span><i class="iconfont iconjiantou_down"></i></a>
+  <a href="javascript:;" class="select-room"><span id="room">房间</span><i class="iconfont iconjiantou_down"></i></a>
+</div>
+<div class="weui-cells tiaosu-list">
+    <a class="weui-cell weui-cell_access select-org" href="javascript:;">
+        <div class="weui-cell__bd">
+          <p>检查组织</p>
+        </div>
+        <div class="weui-cell__ft tips" id="orgName"></div>
+    </a>
+    <div class="weui-cell">
+        <div class="weui-cell__bd">
+          <p>检查时间</p>
+        </div>
+        <div class="weui-cell__ft tips" id="time"></div>
+    </div>
+    <a class="weui-cell weui-cell_access" href="javascript:;" onclick="openScore()">
+        <div class="weui-cell__bd">
+          <p>评分标准</p>
+        </div>
+        <div class="weui-cell__ft tips theme-font" id="score"></div>
+    </a>
+    <a class="weui-cell weui-cell_access sf-weiji" href="javascript:;">
+        <div class="weui-cell__bd">
+          <p>是否违纪</p>
+        </div>
+        <div class="weui-cell__ft tips" id="is-weiji">否</div>
+    </a>
+    <div class="weui-cell weiji-wrap">
+        <ul>
+            <li>
+                <input type="checkbox" name="useDevice">
+                <p class="tit">使用违规电器</p>
+                <textarea id="useDevice" class="weui-textarea" placeholder="多个违章电器用顿号隔开。" rows="3"></textarea>
+            </li>
+            <li>
+                <input type="checkbox" name="badAttitude">
+                <p class="tit">态度不好</p>
+                <textarea id="badAttitude" class="weui-textarea" placeholder="请说明原因" rows="3"></textarea>
+            </li>
+        </ul>
+    </div>
+    <a class="weui-cell">
+        <div class="weui-cell__bd">
+          <p>总得分</p>
+        </div>
+        <div class="weui-cell__ft tips theme-font" id="resultScore">80</div>
+    </a>
+    <div class="weui-cell">
+        <div class="weui-cell__bd">
+          <p>图片上传</p>
+          
+          <div class="weui-uploader__bd" style="margin-right: 0;">
+                <ul class="weui-uploader__files" id="uploaderFiles">
+                    <!-- 预览本地图片容器 -->
+                    
+                </ul>
+                <div class="upload-add">
+                        <input accept="image/*" multiple="multiple" class="weui-uploader__input file_input uploaderInput" type="file" name="file">
+                </div>
+                            
+        </div>
+        <form enctype="multipart/form-data" id="Form">
+              <div class="weui-uploader">
+                        <div class="weui-uploader__bd">
+
+                                <!-- <div class="upload-add">
+                                    <input accept="image/*" multiple="multiple" class="weui-uploader__input file_input uploaderInput" type="file" name="file">
+                                </div> -->
+                            
+                        </div>
+                </div>
+          </form>
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__bd">
+          <p>备注</p>
+          <textarea id="remark" class="weui-textarea" placeholder="请输入备注" rows="3" style="margin-top: .05rem;"></textarea>
+        </div>
+    </div>
+</div>
+
+
+<a href="javascript:;" class="btn-big" onclick="submitBtn()">提交</a>
+
+
+<!-- 选择校区弹层 -->
+<div class="ws-select-layer area-layer">
+    <div class="main">
+        <ul>
+            <li onclick="getArea(this)">东校区</li>
+            <li onclick="getArea(this)">西校区</li>
+            <li onclick="getArea(this)">南校区</li>
+            <li onclick="getArea(this)">北校区</li>
+        </ul>
+    </div>
+</div>
+
+<!-- 选择楼宇弹层 -->
+<div class="ws-select-layer build-layer">
+    <div class="main">
+        <ul>
+            <li onclick="getBuild(this)">1号楼</li>
+            <li onclick="getBuild(this)">2号楼</li>
+            <li onclick="getBuild(this)">3号楼</li>
+            <li onclick="getBuild(this)">4号楼</li>
+        </ul>
+    </div>
+</div>
+
+<!-- 选择楼层弹层 -->
+<div class="ws-select-layer floor-layer">
+    <div class="main">
+        <ul>
+            <li onclick="getFloor(this)">1层</li>
+            <li onclick="getFloor(this)">2层</li>
+            <li onclick="getFloor(this)">3层</li>
+            <li onclick="getFloor(this)">4层</li>
+        </ul>
+    </div>
+</div>
+
+<!-- 选择房间弹层 -->
+<div class="ws-select-layer room-layer">
+    <div class="main">
+        <ul>
+            <li onclick="getRoom(this)">1001</li>
+            <li onclick="getRoom(this)">1002</li>
+            <li onclick="getRoom(this)">1003</li>
+            <li onclick="getRoom(this)">1004</li>
+        </ul>
+    </div>
+</div>
+
+
+<!-- 检查组织弹层 -->
+<div class="ws-select-layer check-org">
+    <div class="main">
+        <ul>
+            <li onclick="getOrg(this)">院系检查</li>
+            <li onclick="getOrg(this)">校级检查</li>
+            <li onclick="getOrg(this)">学生处检查</li>
+        </ul>
+    </div>
+</div>
+
+
+<!-- 评分标准 -->
+<div class="ws-select-layer score-layer">
+    <div class="main">
+        <p class="score-tit"><span>总分：</span><i class="score">0</i></p>
+        <ul style="height: 2.64rem;" class="score-list">
+            <!-- <li onclick="getScore(this)" data-score="1">地面不干净（1分）</li>
+            <li onclick="getScore(this)" data-score="2">床铺不干净（2分）</li>
+            <li onclick="getScore(this)" data-score="3">桌面物品摆放不整齐（3分）</li>
+            <li onclick="getScore(this)" data-score="4">垃圾桶内、门外的垃圾清理不干净（4分）</li>
+            <li onclick="getScore(this)" data-score="5">阳台物品拜访不整齐（5分）</li>
+            <li onclick="getScore(this)" data-score="6">乱挂衣物，乱扯绳线的现象（6分）</li> -->
+        </ul>
+        <div class="score-btn">
+            <a href="javascript:;" class="cancel" onclick="closeScore()">取消</a>
+            <a href="javascript:;" class="sure" onclick="yesScore()">确定</a>
+        </div>
+    </div>
+</div>
+
+<!-- 是否违纪弹层 -->
+<div class="ws-select-layer is-rule">
+    <div class="main" style="height: 1rem;">
+        <ul>
+            <li onclick="getRule(this)" class="active">否</li>
+            <li onclick="getRule(this)">是</li>
+        </ul>
+    </div>
+</div>
+
+
+<script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+<script type="text/javascript" src="jquery-weui/js/jquery-weui.min.js"></script>
+<script type="text/javascript" src="jquery-weui/js/swiper.min.js"></script>
+<script type="text/javascript">
+//模拟评分标准数据
+var scoreData=[
+    {text:'地面很干净',score:1,type:'add'},
+    {text:'床铺很干净',score:2,type:'add'},
+    {text:'桌面物品摆放不整齐',score:3,type:'min'},
+    {text:'垃圾桶内、门外的垃圾清理不干净',score:4,type:'min'},
+    {text:'阳台物品拜访不整齐',score:5,type:'min'},
+    {text:'乱挂衣物，乱扯绳线的现象',score:6,type:'min'},
+];
+
+// 根据分数类型处理是加还是减
+$.each(scoreData,function(index,item){
+    if (item.type=='add') {
+        item.score='+'+item.score;
+    }
+    if (item.type=='min') {
+        item.score='-'+item.score;
+    }
+});
+
+//数据追加到元素
+$.each(scoreData,function(index,item){
+    $('.score-list').append('<li onclick="getScore(this)" data-score="'+item.score+'">'+item.text+'（'+item.score+'分）</li>');
+});
+
+
+/////////////////////////////////////////////////打开选择校区弹层
+$('.select-schoolarea').click(function(){
+    $('.area-layer').fadeIn(100);
+});
+
+// 点击校区遮罩关闭弹层
+$('.area-layer').click(function(){
+    $(this).fadeOut(100);
+});
+
+// 点击校区内容区遮罩阻止冒泡 不关闭
+$('.area-layer .main').click(function(e){
+    e.stopPropagation();
+});
+
+// 选择校区
+function getArea(_this){
+    var text=$(_this).text();
+    $('#area').text(text);
+    $('.area-layer').hide();
+}
+
+
+
+
+//////////////////////////////////////////////////打开选择楼宇弹层
+$('.select-build').click(function(){
+    $('.build-layer').fadeIn(100);
+});
+
+// 点击楼宇遮罩关闭弹层
+$('.build-layer').click(function(){
+    $(this).fadeOut(100);
+});
+
+// 点击楼宇内容区遮罩阻止冒泡 不关闭
+$('.build-layer .main').click(function(e){
+    e.stopPropagation();
+});
+
+// 选择楼宇
+function getBuild(_this){
+    var text=$(_this).text();
+    $('#build').text(text);
+    $('.build-layer').hide();
+}
+
+
+//////////////////////////////////////////////////打开选择楼层弹层
+$('.select-floor').click(function(){
+    $('.floor-layer').fadeIn(100);
+});
+
+// 点击楼宇遮罩关闭弹层
+$('.floor-layer').click(function(){
+    $(this).fadeOut(100);
+});
+
+// 点击楼宇内容区遮罩阻止冒泡 不关闭
+$('.floor-layer .main').click(function(e){
+    e.stopPropagation();
+});
+
+// 选择楼层
+function getFloor(_this){
+    var text=$(_this).text();
+    $('#floor').text(text);
+    $('.floor-layer').hide();
+}
+
+
+
+//////////////////////////////////////////////////打开选择房间弹层
+$('.select-room').click(function(){
+    $('.room-layer').fadeIn(100);
+});
+
+// 点击房间遮罩关闭弹层
+$('.room-layer').click(function(){
+    $(this).fadeOut(100);
+});
+
+// 点击房间内容区遮罩阻止冒泡 不关闭
+$('.room-layer .main').click(function(e){
+    e.stopPropagation();
+});
+
+// 选择房间
+function getRoom(_this){
+    var text=$(_this).text();
+    $('#room').text(text);
+    $('.room-layer').hide();
+}
+
+
+
+/////////////////////////////////////////////////点击检查组织弹层遮罩层 关闭
+
+$('.select-org').click(function(){
+    $('.check-org').fadeIn(100);
+});
+
+$('.check-org').click(function(){
+    $(this).hide();
+});
+
+//点击检查组织内容 阻止冒泡 不关闭
+$('.check-org .main').click(function(e){
+    e.stopPropagation();
+});
+
+
+
+//////////////////////////////////////////////////////点击是否违纪弹层遮罩层 关闭
+$('.is-rule').click(function(){
+    $(this).fadeOut(100);
+});
+//点击是否违纪内容 阻止冒泡 不关闭
+$('.is-rule .main').click(function(e){
+    e.stopPropagation();
+});
+
+//打开检查组织弹层
+function checkOrg(_this){
+    $('.check-org').fadeIn(100);
+}  
+// 选择检查组织
+function getOrg(_this){
+    $('#orgName').text($(_this).text());
+    $('.check-org').fadeOut(100);
+} 
+
+
+//获取系统时间
+getDate('#time');
+setInterval("getDate('#time')",1000);
+
+
+
+///////////////////////////////////////////////////打开是否违纪弹层
+$('.sf-weiji').click(function(){
+    $('.is-rule').fadeIn(100);
+});
+
+
+// 选择是否违纪
+function getRule(_this){
+    var text=$(_this).text();
+    $(_this).siblings().removeClass('active');
+    $(_this).addClass('active');
+
+    $('#is-weiji').text(text);
+
+    if (text=='是') {
+        $('.weiji-wrap').show();
+    }
+    if (text=='否') {
+        $('.weiji-wrap').hide();
+    }
+
+}
+
+
+
+/////////////////////////////////////////////////评分标准
+ var totalScore=parseFloat($('.score-tit .score').text());//总分
+
+// 打开评分标准弹窗
+ function openScore(){
+    $('.score-layer').fadeIn(100);
+ }
+
+// 关闭评分标准
+ function closeScore(){
+    $('.score-layer').fadeOut(100);
+ }
+
+ // 评分标准确定按钮
+ function yesScore(){
+    totalScore=80;
+    $('#resultScore').text(80);
+    var resultScore=parseFloat($('#resultScore').text());
+    var totalScore=parseFloat($('.score').text());
+    $('#score').text($('.score-tit .score').text());
+    $('#resultScore').text(resultScore+totalScore);
+    $('.score-layer').fadeOut(100);
+
+ }
+
+
+// 选择分数
+function getScore(_this){
+    var aScore=parseFloat($(_this).attr('data-score'));
+    var aLength=$('.score-list li').length;//评分项总条数
+   
+    if ($(_this).is('.active')) {
+        $(_this).removeClass('active');
+        totalScore-=aScore;
+        $('.score-tit .score').text(totalScore);
+        console.log('总分',totalScore);
+        return;
+    }
+    $(_this).addClass('active');
+    console.log(aScore);
+    totalScore+=aScore;
+    $('.score-tit .score').text(totalScore);
+
+    console.log('总分',totalScore);
+}
+
+
+
+
+
+////////////////////////////////////////////////////////////// 提交
+
+var formData=new FormData($('#Form')[0]);
+
+function submitBtn(){
+    console.log('上传的图片',formData.getAll('file'));//所有上传的图片
+    var area=$('#area').text();//校区
+    var build=$('#build').text();//楼宇
+    var floor=$('#floor').text();//楼层
+    var room=$('#room').text();//房间
+    var orgName=$('#orgName').text();//检查组织
+    var score=$('#score').text();//评分标准
+    var resultScore=$('#resultScore').text();//总得分
+    var remark=$('#remark').val();//备注
+
+    var useDevice='';//使用违章电器文本
+    var badAttitude='';//态度不好文本
+   
+
+    // 如果是否违纪为 是，则赋值
+    if ($('#is-weiji').text()=='是') {
+
+        // 如果勾选了使用违章电器，则给useDevice赋值
+        if ($('input[name=useDevice]').is(':checked')) {
+            useDevice=$('#useDevice').val();
+        }
+
+        // 如果勾选了态度不好，则给badAttitude赋值
+        if ($('input[name=badAttitude]').is(':checked')) {
+            badAttitude=$('#badAttitude').val();
+        }
+    }
+
+    // if (area=='校区') {
+    //     $.toast("请选择校区", "text");
+    //     return;
+    // }
+    // if (build=='楼宇') {
+    //     $.toast("请选择楼宇", "text");
+    //     return;
+    // }
+    // if (floor=='楼层') {
+    //     $.toast("请选择楼层", "text");
+    //     return;
+    // }
+    // if (room=='房间') {
+    //     $.toast("请选择房间", "text");
+    //     return;
+    // }
+    // if (orgName=='') {
+    //     $.toast("请选择检查组织", "text");
+    //     return;
+    // }
+    // if (score=='') {
+    //     $.toast("请选择评分标准", "text");
+    //     return;
+    // }
+
+    
+
+    //////////////////////////////获取选择的所有信息
+    // console.log('校区：',area);
+    // console.log('楼宇：',build);
+    // console.log('楼层：',floor);
+    // console.log('房间：',room);
+    // console.log('检查组织：',orgName);
+    // console.log('评分标准：',score);
+    // console.log('总得分：',resultScore);
+    // console.log('备注：',remark);
+
+    // console.log('使用违章电器：',useDevice);
+    // console.log('态度不好：',badAttitude);
+
+
+
+    // 上传照片
+    $.ajax({
+        url: "http://192.168.1.215:94/v1/land/importLandImgDuo",
+        type: 'post',
+        data: formData,// 上传formdata封装的数据
+        cache: false,//// 不缓存
+        processData: false,//不处理发送的数据
+        contentType: false,//不设置Content-Type请求头
+        success: function(data) {
+            console.log('返回的图片',data);
+        },
+        error: function() {
+            console.log('异常');
+        }
+    });
+
+}
+
+
+
+
+var fileNum=0;
+
+ // 上传之后添加本地预览
+$(".uploaderInput").on("change", function(e) {
+
+    fileNum++;
+
+    // 本地预览
+    var src, url = window.URL || window.webkitURL || window.mozURL,
+    files = e.target.files;
+    for (var i = 0, len = files.length; i < len; ++i) {
+        var file = files[i];
+
+        if (url) {
+            src = url.createObjectURL(file);
+        } else {
+            src = e.target.result;
+        }
+
+        $("#uploaderFiles").append('<li class="weui-uploader__file" style="background-image:url('+src+')"></li>');
+    }
+  
+
+    // formData 追加文件
+    for (var i = 0; i < e.target.files.length; i++) {
+
+        formData.append('file'+fileNum,e.target.files[i]);
+
+    }
+
+
+});
+
+
+    
+
+</script>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+<title>商品预订</title>
+<link rel="stylesheet" type="text/css" href="iconfont/iconfont.css"> 
+<link rel="stylesheet" type="text/css" href="jquery-weui/css/weui.min.css">
+<link rel="stylesheet" type="text/css" href="jquery-weui/css/jquery-weui.min.css">
+<link rel="stylesheet" type="text/css" href="css/page.css">
+<style type="text/css">
+
+.fixed-goods-nav{height: 1.23rem;}
+
+
+
+</style>
+</head>
+<body>
+
+<div class="fixed-goods-nav">
+  <div class="goods-nav-wrap">
+    <div class="nav">
+      <a href="javascript:;" class="active">商品预订</a>
+      <a href="javascript:;">我的预订</a>
+    </div>
+    <div class="search-wrap">
+      <input type="text" name="" placeholder="请输入商品">
+      <i class="iconfont iconfangdajing search-btn"></i>
+    </div>
+    <div class="goods-select-type">
+      <p class="type-tit"><span>生活用品</span><i class="iconfont iconshangjiantou"></i></p>
+    </div>
+    <div class="goods-item">
+      <li onclick="selectGoods(this)" class="active">生活用品</li>
+      <li onclick="selectGoods(this)">男上衣</li>
+      <li onclick="selectGoods(this)">鞋子</li>
+      <li onclick="selectGoods(this)">帽子</li>
+      <li onclick="selectGoods(this)">裤子</li>
+      <li onclick="selectGoods(this)">T恤</li>
+    </div>
+  </div>
+</div>
+
+
+<div class="goods-list">
+  <ul>
+    <li>
+      <a href="javascript:;">
+        <div class="goods-img"><img src="images/goods.jpeg"></div>
+        <div class="goods-info">
+          <p class="goods-tit">南京人(NanJiren)全棉高支床品套件双人纯棉四件套床单</p>
+          <p class="goods-type">类型:1.5米/1.8米</p>
+          <div class="price">
+            ￥<span>120</span>
+          </div>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a href="javascript:;">
+        <div class="goods-img"><img src="images/goods.jpeg"></div>
+        <div class="goods-info">
+          <p class="goods-tit">南京人(NanJiren)全棉高支床品套件双人纯棉四件套床单</p>
+          <p class="goods-type">类型:1.5米/1.8米</p>
+          <div class="price">
+            ￥<span>120</span>
+          </div>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a href="javascript:;">
+        <div class="goods-img"><img src="images/goods.jpeg"></div>
+        <div class="goods-info">
+          <p class="goods-tit">南京人(NanJiren)全棉高支床品套件双人纯棉四件套床单</p>
+          <p class="goods-type">类型:1.5米/1.8米</p>
+          <div class="price">
+            ￥<span>120</span>
+          </div>
+        </div>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+<script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="jquery-weui/js/jquery-weui.min.js"></script>
+<script type="text/javascript" src="jquery-weui/js/swiper.min.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+<script type="text/javascript">
+
+//选择商品类型
+function selectGoods(obj){
+    if ($(obj).is('.active')) {
+        return;
+    }
+  $(obj).siblings().removeClass('active');
+  $(obj).addClass('active');
+  $('.type-tit span').text($(obj).text());
+  $('.goods-item').slideUp(200);
+
+  // 模拟加载中
+  $.showLoading('加载中...');//开启加载中
+  setTimeout(function(){
+    $.hideLoading();//关闭加载中
+  },1000);
+}
+
+
+// 商品类型显示隐藏切换
+$('.type-tit').click(function(){
+  $('.type-tit .iconfont').toggleClass('on');
+  $('.goods-item').stop().slideToggle(200);
+});
+
+</script>
+</body>
+</html>

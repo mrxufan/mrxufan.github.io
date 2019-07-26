@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+<title>退宿申请</title>
+<link rel="stylesheet" type="text/css" href="iconfont/iconfont.css"> 
+<link rel="stylesheet" type="text/css" href="jquery-weui/css/weui.min.css">
+<link rel="stylesheet" type="text/css" href="jquery-weui/css/jquery-weui.min.css">
+<link rel="stylesheet" type="text/css" href="css/page.css">
+<style type="text/css">
+
+.fenpei-layer{position: fixed;width: 100%;height: 100%;background: rgba(0, 0, 0, .3);left: 0;top: 0;z-index: 10;display: none;}
+.fenpei-layer ul{position: absolute;width: 50%;background: #fff;height: 1.75rem;left: 50%;top: 50%;transform: translate(-50%,-50%);overflow-y: scroll;}
+.fenpei-layer ul li{text-align: center;margin: .15rem;font-size: .16rem;}
+
+.upload{position: absolute;width: 100%;height: 100%;left: 0;top: 0;opacity: 0;}
+</style>
+</head>
+<body>
+
+<!-- header -->
+<div class="fixed-header">
+  <header class="header">
+    <a href="javascript:history.go(-1);" class="back-btn">
+      <i class="iconfont iconzuojiantou"></i>
+    </a>
+    <span class="title">退宿申请</span>
+  </header>  
+</div>
+
+
+<div class="weui-cells tuisu-detail">
+  <div class="weui-cell">
+    <div class="weui-cell__bd">
+      <p>姓名</p>
+    </div>
+    <div class="weui-cell__ft tips">张三</div>
+  </div>
+  <div class="weui-cell">
+    <div class="weui-cell__bd">
+      <p>学号</p>
+    </div>
+    <div class="weui-cell__ft tips">120225</div>
+  </div>
+  <div class="weui-cell">
+    <div class="weui-cell__bd">
+      <p>性别</p>
+    </div>
+    <div class="weui-cell__ft tips">男</div>
+  </div>
+  <div class="weui-cell">
+    <div class="weui-cell__bd">
+      <p>年级</p>
+    </div>
+    <div class="weui-cell__ft tips">2018</div>
+  </div>
+  <div class="weui-cell">
+    <div class="weui-cell__bd">
+      <p>民族</p>
+    </div>
+    <div class="weui-cell__ft tips">汉</div>
+  </div>
+  <div class="weui-cell">
+    <div class="weui-cell__bd">
+      <p>学生类型</p>
+    </div>
+    <div class="weui-cell__ft tips">本科生</div>
+  </div>
+  <div class="weui-cell">
+    <div class="weui-cell__bd">
+      <p>院系班级</p>
+    </div>
+    <div class="weui-cell__ft tips">计算机科学与技术</div>
+  </div>
+  <div class="weui-cell">
+    <div class="weui-cell__bd">
+      <p>宿舍信息</p>
+    </div>
+    <div class="weui-cell__ft tips">海棠-南校区-7#-1层-106左-4号床位</div>
+  </div>
+</div>
+
+<div class="weui-cells tuisu-detail">
+  <div class="weui-cell">
+    <div class="weui-cell__bd">
+      <p>申报时间</p>
+    </div>
+    <div class="weui-cell__ft tips time" id="time"></div>
+  </div>
+  <a class="weui-cell weui-cell_access" href="javascript:;" onclick="getReason(this)">
+      <div class="weui-cell__bd">
+        <p>申请意愿</p>
+      </div>
+      <div class="weui-cell__ft apply-yy"></div>
+  </a>
+</div>
+
+
+
+
+<!-- 分配选择弹层 -->
+<div class="fenpei-layer">
+  <ul>
+    <li onclick="getInfo(this)">毕业</li>
+    <li onclick="getInfo(this)">休学</li>
+    <li onclick="getInfo(this)">转学</li>
+    <li onclick="getInfo(this)">退学</li>
+  </ul>
+</div>
+
+
+
+
+<a href="javascript:;" class="btn-big">提交</a>
+
+
+
+
+
+
+<script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="jquery-weui/js/jquery-weui.min.js"></script>
+<script type="text/javascript" src="jquery-weui/js/swiper.min.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+<script type="text/javascript">
+
+
+//获取系统时间
+getDate('#time');
+setInterval("getDate('#time')",1000);
+
+
+// 申请原因弹窗
+function getReason(obj,type) {
+  $('.fenpei-layer').show();
+}
+
+
+// 上传附件
+$('.upload').change(function(e){
+  $(this).siblings('.upload-name').html(e.target.value);
+  console.log(e.target.value);
+});
+
+
+//点击遮罩层关闭弹层
+$('.fenpei-layer').click(function(e){
+  if (e.target.className=='fenpei-layer') {
+    $(this).hide();
+  }
+});
+
+
+// 选择
+function getInfo(obj){
+  $('.apply-yy').html($(obj).text());
+   $('.fenpei-layer').hide();
+}
+
+
+
+</script>
+</body>
+</html>

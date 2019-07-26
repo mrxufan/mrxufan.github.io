@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+<title>校外申请</title>
+<link rel="stylesheet" type="text/css" href="iconfont/iconfont.css"> 
+<link rel="stylesheet" type="text/css" href="jquery-weui/css/weui.min.css">
+<link rel="stylesheet" type="text/css" href="jquery-weui/css/jquery-weui.min.css">
+<link rel="stylesheet" type="text/css" href="css/page.css">
+<style type="text/css">
+
+
+.upload{position: absolute;width: 100%;height: 100%;left: 0;top: 0;opacity: 0;}
+</style>
+</head>
+<body>
+
+<!-- header -->
+<div class="fixed-header">
+  <header class="header">
+    <a href="javascript:history.go(-1);" class="back-btn">
+      <i class="iconfont iconzuojiantou"></i>
+    </a>
+    <span class="title">调宿申请</span>
+  </header>  
+</div>
+
+
+<div class="weui-cells tuisu-detail">
+  <div class="weui-cell">
+    <div class="weui-cell__bd">
+      <p>姓名</p>
+    </div>
+    <div class="weui-cell__ft tips">张三</div>
+  </div>
+  <div class="weui-cell">
+    <div class="weui-cell__bd">
+      <p>学号</p>
+    </div>
+    <div class="weui-cell__ft tips">120225</div>
+  </div>
+  <div class="weui-cell">
+    <div class="weui-cell__bd">
+      <p>性别</p>
+    </div>
+    <div class="weui-cell__ft tips">男</div>
+  </div>
+  <div class="weui-cell">
+    <div class="weui-cell__bd">
+      <p>年级</p>
+    </div>
+    <div class="weui-cell__ft tips">2018</div>
+  </div>
+  <div class="weui-cell">
+    <div class="weui-cell__bd">
+      <p>民族</p>
+    </div>
+    <div class="weui-cell__ft tips">汉</div>
+  </div>
+  <div class="weui-cell">
+    <div class="weui-cell__bd">
+      <p>学生类型</p>
+    </div>
+    <div class="weui-cell__ft tips">本科生</div>
+  </div>
+  <div class="weui-cell">
+    <div class="weui-cell__bd">
+      <p>院系班级</p>
+    </div>
+    <div class="weui-cell__ft tips">计算机科学与技术</div>
+  </div>
+  <div class="weui-cell">
+    <div class="weui-cell__bd">
+      <p>宿舍信息</p>
+    </div>
+    <div class="weui-cell__ft tips">海棠-南校区-7#-1层-106左-4号床位</div>
+  </div>
+</div>
+
+<div class="weui-cells tuisu-detail">
+  <div class="weui-cell">
+    <div class="weui-cell__bd">
+      <p>申报时间</p>
+    </div>
+    <div class="weui-cell__ft tips time"></div>
+  </div>
+  <a class="weui-cell weui-cell_access" href="javascript:;" onclick="getReason(this,'意愿')">
+      <div class="weui-cell__bd">
+        <p>申请意愿</p>
+      </div>
+      <div class="weui-cell__ft apply-type"></div>
+  </a>
+  <a class="weui-cell weui-cell_access" href="javascript:;" onclick="getReason(this,'原因')">
+      <div class="weui-cell__bd">
+        <p>申请原因</p>
+      </div>
+      <div class="weui-cell__ft apply-type"></div>
+  </a>
+</div>
+
+<div class="weui-cells tuisu-detail">
+  <a class="weui-cell weui-cell_access" href="javascript:;">
+      <div class="weui-cell__bd">
+        <p>上传附件</p>
+      </div>
+      <div class="weui-cell__ft upload-name" style="width: 2.7rem;"></div>
+      <input type="file" name="" class="upload">
+  </a>
+</div>
+
+
+<!-- 申请进度  已通过li加past 已驳回li加refuse 未审核不加class -->
+<div class="time-line">
+  <ul>
+    <li>
+        <div class="wrap">
+        <p class="name">张三</p>
+          <div class="detail">
+            <span class="type">未审核</span>
+          </div>
+        </div>
+    </li>
+    <li>
+        <div class="wrap">
+          <p class="name">张三</p>
+          <div class="detail">
+            <span class="type">未审核</span>
+          </div>
+        </div>
+    </li>
+    <li>
+        <div class="wrap">
+        <p class="name">张三</p>
+          <div class="detail">
+            <span class="type">未审核</span>
+          </div>
+        </div>
+    </li>
+  </ul>
+</div>
+
+
+
+<a href="javascript:;" class="btn-big">提交</a>
+
+
+
+
+
+
+<script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="jquery-weui/js/jquery-weui.min.js"></script>
+<script type="text/javascript" src="jquery-weui/js/swiper.min.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+<script type="text/javascript">
+
+
+//获取系统时间
+getDate('.time');
+setInterval("getDate('.time')",1000);
+
+
+// 申请原因弹窗
+function getReason(obj,type) {
+  $.prompt({
+    title: '请输入申请'+type,
+    onOK: function (input) {
+      console.log(input);
+      $(obj).find('.apply-type').html(input);
+      //点击确认
+    },
+    onCancel: function () {
+      //点击取消
+    }
+  });
+}
+
+
+$('.upload').change(function(e){
+  $(this).siblings('.upload-name').html(e.target.value);
+  console.log(e.target.value);
+});
+
+</script>
+</body>
+</html>

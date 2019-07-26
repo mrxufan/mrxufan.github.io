@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+<title>大物件登记记录</title>
+<link rel="stylesheet" type="text/css" href="iconfont/iconfont.css"> 
+<link rel="stylesheet" type="text/css" href="jquery-weui/css/weui.min.css">
+<link rel="stylesheet" type="text/css" href="jquery-weui/css/jquery-weui.min.css">
+<link rel="stylesheet" type="text/css" href="css/page.css">
+<style type="text/css">
+.weui-cell{padding:.1rem;}
+
+.ws-nav{height: .45rem;background: #fff;line-height: .45rem;display: flex;}
+.ws-nav a{flex:1;text-align: center;color: #666;}
+.ws-nav a.active{position: relative;color: #07CED5;}
+.ws-nav a.active:after{content: '';position: absolute;width: .3rem;height: .03rem;background: #07CED5;left: 50%;bottom: 0;display: block;transform: translateX(-50%);}
+
+.select-area{height: .4rem;background: #fff;display: flex;border-top: .01rem solid #eee;}
+.select-area a{line-height: .4rem;text-align: center;flex:1;color: #666;}
+.select-area a span{position: relative;bottom: .02rem;}
+.select-area a .iconfont{color: #07CED5;font-size: .18rem;}
+
+
+.ws-select-layer{position: fixed;width: 100%;height: 100%;left: 0;top: 0;background: rgba(0, 0, 0, .6);align-items: center;z-index: 10;display: none;}
+.ws-select-layer ul{overflow-y: auto;}
+.ws-select-layer .main{position: absolute;background: #fff;width: 60%;height: 2rem;border-radius: .04rem;left: 50%;top: 50%;transform: translate(-50%,-50%);padding: .1rem;}
+.ws-select-layer .main li{border-bottom: .01rem solid #eee;padding: .1rem 0;text-align: center;font-size: .15rem;color: #666;}
+
+
+
+.checklist p{margin: .06rem 0;}
+.checklist p.on .name{color: #07CED5;}
+.checklist .type{display: inline-block;width: .5rem;text-align: right;}
+.checklist a:active{background: #f9f9f9;}
+
+
+.search-wrap {
+    background: #fff;
+    padding: .1rem;
+    position: relative;
+}
+.search-wrap .search-icon {
+    position: absolute;
+    right: .1rem;
+    top: .1rem;
+    z-index: 2;
+    width: .34rem;
+    height: .34rem;
+    text-align: center;
+    line-height: .34rem;
+}
+
+.search-wrap input {
+    background: #F5F5F5;
+    width: 100%;
+    height: .34rem;
+    border-radius: .03rem;
+    padding: .1rem;
+    box-sizing: border-box;
+    color: #999;
+    position: relative;
+    padding-right: .34rem;
+}
+
+.lend-key-header{position: fixed;width: 100%;height: 1rem;left: 0;top: 0;z-index: 10;box-shadow: 0 1px 2px rgba(0,0,0,.1);}
+</style>
+</head>
+<body>
+<div style="height: 1rem;">
+  <div class="lend-key-header">
+    <div class="ws-nav">
+      <a href="javascript:;">大物件登记</a>
+      <a href="javascript:;" class="active">大物件登记记录</a>
+    </div>
+    <div class="search-wrap" style="border-top: .01rem solid #eee;">
+      <i class="iconfont iconfangdajing search-icon" onclick="fenpeiSearch()"></i>
+      <input type="text" placeholder="请输入学号或姓名">
+    </div>
+  </div>
+</div>
+
+<div class="weui-cells tiaosu-list checklist">
+    <a class="weui-cell weui-cell_access" href="javascript:;">
+        <div class="weui-cell__bd">
+          <p><span class="type">姓名：</span><span class="name">张三</span></p>
+          <p><span class="type">学号：</span><span class="name">1234567890</span></p>
+          <p><span class="type">宿舍：</span><span class="name">1号楼-3层-306房间-4号床</span></p>
+          <p><span class="type">物品：</span><span class="name">灰色行李箱</span></p>
+        </div>
+        <div class="weui-cell__ft tips"></div>
+    </a>
+    <a class="weui-cell weui-cell_access" href="javascript:;">
+        <div class="weui-cell__bd">
+          <p><span class="type">姓名：</span><span class="name">张三</span></p>
+          <p><span class="type">学号：</span><span class="name">1234567890</span></p>
+          <p><span class="type">宿舍：</span><span class="name">1号楼-3层-306房间-4号床</span></p>
+          <p><span class="type">物品：</span><span class="name">灰色行李箱</span></p>
+        </div>
+        <div class="weui-cell__ft tips"></div>
+    </a>
+    <a class="weui-cell weui-cell_access" href="javascript:;">
+        <div class="weui-cell__bd">
+          <p><span class="type">姓名：</span><span class="name">张三</span></p>
+          <p><span class="type">学号：</span><span class="name">1234567890</span></p>
+          <p><span class="type">宿舍：</span><span class="name">1号楼-3层-306房间-4号床</span></p>
+          <p><span class="type">物品：</span><span class="name">灰色行李箱</span></p>
+        </div>
+        <div class="weui-cell__ft tips"></div>
+    </a>
+   
+</div>
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+<script type="text/javascript" src="jquery-weui/js/jquery-weui.min.js"></script>
+<script type="text/javascript" src="jquery-weui/js/swiper.min.js"></script>
+<script type="text/javascript">
+
+
+
+
+
+
+//////////////////////////////////////////////////打开选择楼宇弹层
+$('.select-build').click(function(){
+    $('.build-layer').fadeIn(100);
+});
+
+// 点击楼宇遮罩关闭弹层
+$('.build-layer').click(function(){
+    $(this).fadeOut(100);
+});
+
+// 点击楼宇内容区遮罩阻止冒泡 不关闭
+$('.build-layer .main').click(function(e){
+    e.stopPropagation();
+});
+
+// 选择楼宇
+function getBuild(_this){
+    var text=$(_this).text();
+    $('#build').text(text);
+    $('.build-layer').hide();
+}
+
+
+//////////////////////////////////////////////////打开选择楼层弹层
+$('.select-floor').click(function(){
+    $('.floor-layer').fadeIn(100);
+});
+
+// 点击楼宇遮罩关闭弹层
+$('.floor-layer').click(function(){
+    $(this).fadeOut(100);
+});
+
+// 点击楼宇内容区遮罩阻止冒泡 不关闭
+$('.floor-layer .main').click(function(e){
+    e.stopPropagation();
+});
+
+// 选择楼层
+function getFloor(_this){
+    var text=$(_this).text();
+    $('#floor').text(text);
+    $('.floor-layer').hide();
+}
+
+
+
+//////////////////////////////////////////////////打开选择房间弹层
+$('.select-room').click(function(){
+    $('.room-layer').fadeIn(100);
+});
+
+// 点击房间遮罩关闭弹层
+$('.room-layer').click(function(){
+    $(this).fadeOut(100);
+});
+
+// 点击房间内容区遮罩阻止冒泡 不关闭
+$('.room-layer .main').click(function(e){
+    e.stopPropagation();
+});
+
+// 选择房间
+function getRoom(_this){
+    var text=$(_this).text();
+    $('#room').text(text);
+    $('.room-layer').hide();
+}
+
+
+
+/////////////////////////////////////////////////点击检查组织弹层遮罩层 关闭
+
+$('.select-org').click(function(){
+    $('.check-org').fadeIn(100);
+});
+
+$('.check-org').click(function(){
+    $(this).hide();
+});
+
+//点击检查组织内容 阻止冒泡 不关闭
+$('.check-org .main').click(function(e){
+    e.stopPropagation();
+});
+
+
+//选择检查组织
+function getOrg(_this){
+    $('#checkOrg').text($(_this).text());
+    $('.check-org').hide();
+}
+
+
+
+
+</script>
+</body>
+</html>

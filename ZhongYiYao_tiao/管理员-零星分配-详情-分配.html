@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+<title>管理员-零星分配-详情-分配</title>
+<link rel="stylesheet" type="text/css" href="iconfont/iconfont.css"> 
+<link rel="stylesheet" type="text/css" href="jquery-weui/css/weui.min.css">
+<link rel="stylesheet" type="text/css" href="jquery-weui/css/jquery-weui.min.css">
+<link rel="stylesheet" type="text/css" href="css/page.css">
+<style type="text/css">
+.lx-fenpei .weui-label{width: .8rem;text-align: right;}
+.lx-fenpei{margin-top: 0;}
+.lx-fenpei .weui-cell{padding: 0 .1rem;margin: .1rem;}
+.lx-fenpei .weui-cell:before{display: none;}
+.lx-fenpei input{height: .4rem;border: 1px solid #E0E0E0;border-radius: .03rem;padding: .1rem;box-sizing: border-box;}
+
+
+.fenpei-layer{position: fixed;width: 100%;height: 100%;background: rgba(0, 0, 0, .3);left: 0;top: 0;z-index: 10;display: none;}
+.fenpei-layer ul{position: absolute;width: 50%;background: #fff;height: 2rem;left: 50%;top: 50%;transform: translate(-50%,-50%);overflow-y: scroll;}
+.fenpei-layer ul li{text-align: center;margin: .15rem;}
+</style>
+</head>
+<body>
+
+<!-- header -->
+<div class="fixed-header">
+  <header class="header">
+    <a href="javascript:history.go(-1);" class="back-btn">
+      <i class="iconfont iconzuojiantou"></i>
+    </a>
+    <span class="title">分配</span>
+  </header>  
+</div>
+
+<div class="weui-cells weui-cells_form lx-fenpei">
+  <div class="weui-cell">
+    <div class="weui-cell__hd"><label class="weui-label">入住人员：</label></div>
+    <div class="weui-cell__bd">
+     张三
+    </div>
+  </div>
+  <div class="weui-cell">
+    <div class="weui-cell__hd"><label class="weui-label">校区：</label></div>
+    <div class="weui-cell__bd">
+      <input class="weui-input" placeholder="点击选择" readonly name="area" onclick="getFenpei(this)">
+    </div>
+  </div>
+  <div class="weui-cell">
+    <div class="weui-cell__hd"><label class="weui-label">楼宇：</label></div>
+    <div class="weui-cell__bd">
+      <input class="weui-input" placeholder="点击选择" readonly name="build" onclick="getFenpei(this)">
+    </div>
+  </div>
+  <div class="weui-cell">
+    <div class="weui-cell__hd"><label class="weui-label">楼层：</label></div>
+    <div class="weui-cell__bd">
+      <input class="weui-input" placeholder="点击选择" readonly name="floor" onclick="getFenpei(this)">
+    </div>
+  </div>
+  <div class="weui-cell">
+    <div class="weui-cell__hd"><label class="weui-label">房间：</label></div>
+    <div class="weui-cell__bd">
+      <input class="weui-input" placeholder="点击选择" readonly name="room" onclick="getFenpei(this)">
+    </div>
+  </div>
+  <div class="weui-cell">
+    <div class="weui-cell__hd"><label class="weui-label">床位：</label></div>
+    <div class="weui-cell__bd">
+      <input class="weui-input" placeholder="点击选择" readonly name="bed" onclick="getFenpei(this)">
+    </div>
+  </div>
+ 
+</div>
+
+<a href="javascript:;" class="btn-big" onclick="submitBtn()">确定</a>
+
+
+
+<!-- 分配选择弹层 -->
+<div class="fenpei-layer">
+  <ul>
+    <li onclick="getInfo(this)">东校区</li>
+    <li onclick="getInfo(this)">西校区</li>
+    <li onclick="getInfo(this)">南校区</li>
+    <li onclick="getInfo(this)">北校区</li>
+  </ul>
+</div>
+
+
+
+<script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="jquery-weui/js/jquery-weui.min.js"></script>
+<script type="text/javascript" src="jquery-weui/js/swiper.min.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+<script type="text/javascript">
+
+var ele='';//全局选择器
+
+//点击选择校区...显示候选弹层
+function getFenpei(obj){
+  ele=$(obj);
+  $('.fenpei-layer').show();
+}
+
+
+// 选择
+function getInfo(obj){
+  console.log($(obj).text());
+  $(ele).attr('value',$(obj).text());
+   $('.fenpei-layer').hide();
+}
+
+
+
+//点击遮罩层关闭弹层
+$('.fenpei-layer').click(function(e){
+  if (e.target.className=='fenpei-layer') {
+    $(this).hide();
+  }
+});
+
+
+// 点击确定
+function submitBtn(){
+  var area=$('input[name=area]').val();//校区
+  var build=$('input[name=build]').val();//楼宇
+  var floor=$('input[name=floor]').val();//楼层
+  var room=$('input[name=room]').val();//房间
+  var bed=$('input[name=bed]').val();//床位
+
+  if (area=='') {
+    $.toast("请选择校区", "text");
+    return;
+  }
+  if (build=='') {
+    $.toast("请选择楼宇", "text");
+    return;
+  }
+  if (floor=='') {
+    $.toast("请选择楼层", "text");
+    return;
+  }
+  if (room=='') {
+    $.toast("请选择房间", "text");
+    return;
+  }
+  if (bed=='') {
+    $.toast("请选择床位", "text");
+    return;
+  }
+
+}
+
+</script>
+</body>
+</html>

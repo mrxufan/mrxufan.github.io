@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+<title>商品预订-详情</title>
+<link rel="stylesheet" type="text/css" href="iconfont/iconfont.css"> 
+<link rel="stylesheet" type="text/css" href="jquery-weui/css/weui.min.css">
+<link rel="stylesheet" type="text/css" href="jquery-weui/css/jquery-weui.min.css">
+<link rel="stylesheet" type="text/css" href="css/page.css">
+<style type="text/css">
+.goods-detail .goods-img{height: 2.6rem;background-repeat: no-repeat;background-position: center center;background-size: cover;}
+.goods-detail .goods-price{background: #fff;padding: .1rem;}
+.goods-detail .goods-price .price{color: #EE6C45;font-weight: bold;}
+.goods-detail .goods-price .goods-tip{color: #333;}
+
+.goods-detail .goods-item{background: #fff;margin: .05rem 0;padding: .1rem;}
+.goods-detail .goods-tit{font-weight: bold;color: #333;overflow: hidden;}
+.goods-detail .goods-size .goods-size-list li{background: #F7F7F7;padding: .04rem;margin: .1rem 0;border: .01rem solid #F7F7F7;}
+.goods-detail .goods-size .goods-size-list li.active,.goods-detail .goods-color-list li.active{background: #EEFEFF;border-color: #07CED5;}
+
+.goods-color-list{overflow: hidden;}
+.goods-color-list li{width: 1rem;height: .26rem;background: #eee;float: left;margin-right: .24rem;margin-bottom: .2rem;display: flex;align-items: center;border: .01rem solid #eee;}
+.goods-color-list li:nth-child(3n){margin-right: 0;}
+.goods-color-list li .color-square{display: inline-block;width: .22rem;height: .22rem;margin: 0 .02rem;}
+.goods-color-list li .color-text{color: #666;}
+
+.goods-detail .count{float: right;color: #666;}
+.goods-detail .count .iconfont{display: inline-block;width: .21rem;height: .21rem;text-align: center;line-height: .21rem;float: left;}
+.goods-detail .count input{border: .01rem solid #ccc;width: .35rem;text-align: center;vertical-align: baseline;float: left;}
+
+.goods-detail .goods-address .add-icon{color: #07CED5;font-size: .18rem;}
+
+.submit-btn{background: #fff;padding: .1rem 0;position: fixed;width: 100%;left: 0;bottom: 0;border-top: .01rem solid #eee;}
+.submit-btn a{width: 1.17rem;height: .42rem;text-align: center;line-height: .42rem;background: #07CED5;color: #fff;display: block;border-radius: .42rem;margin: 0 auto;}
+.submit-btn a:active{background: #08c1c7;}
+</style>
+</head>
+<body>
+
+
+
+<div class="goods-detail">
+    <div class="goods-img-info">
+        <div class="goods-img" style="background-image: url(images/goods.jpeg)"></div>
+        <div class="goods-price">
+            <p class="price">￥120</p>
+            <p class="goods-tip">南京人(NanJiren)全棉高支床品套件  双人纯棉四件套床单</p>
+        </div>
+    </div>
+    <div class="goods-size goods-item">
+        <p class="goods-tit">选择尺寸</p>
+        <ul class="goods-size-list">
+            <li onclick="selectSise(this)" class="active">1.6米床【被套150*230cm/床单160*230cm】</li>
+            <li onclick="selectSise(this)">1.8米床【被套150*230cm/床单160*230cm】</li>
+            <li onclick="selectSise(this)">2.0米床【被套150*230cm/床单160*230cm】</li>
+        </ul>
+    </div>
+    <div class="goods-color goods-item">
+        <p class="goods-tit">颜色</p>
+        <ul class="goods-color-list">
+            <li onclick="selectColor(this)" class="active">
+                <span class="color-square" style="background: #C21F30;"></span>
+                <span class="color-text">枫叶红</span>
+            </li>
+            <li onclick="selectColor(this)">
+                <span class="color-square" style="background: #5E7987;"></span>
+                <span class="color-text">淡蓝灰</span>
+            </li>
+            <li onclick="selectColor(this)">
+                <span class="color-square" style="background: #C3D7DF;"></span>
+                <span class="color-text">井天蓝</span>
+            </li>
+            <li onclick="selectColor(this)">
+                <span class="color-square" style="background: #80766E;"></span>
+                <span class="color-text">雁灰</span>
+            </li>
+            <li onclick="selectColor(this)">
+                <span class="color-square" style="background: #F0945D;"></span>
+                <span class="color-text">海螺橙</span>
+            </li>
+            <li onclick="selectColor(this)">
+                <span class="color-square" style="background: #FFFEF8;"></span>
+                <span class="color-text">象牙白</span>
+            </li>
+        </ul>
+    </div>
+    <div class="goods-item">
+        <div class="goods-tit">数量
+            <div class="count">
+              <span class="iconfont iconjianhaocu" onclick="min(this)"></span>
+              <input type="number" name="" readonly="" value="1">
+              <span class="iconfont iconjiahao" onclick="add(this)"></span>
+            </div>
+        </div>
+    </div>
+    <div class="goods-item">
+        <p class="goods-tit">配送地址</p>
+        <p class="goods-address"><i class="iconfont icondingwei add-icon"></i>北区-3号楼-3层-302房间</p>
+    </div>
+</div>
+
+<div style="height: .63rem;">
+    <div class="submit-btn">
+        <a href="javascript:;" onclick="submitBtn()">预订</a>
+    </div>
+</div>
+
+
+
+<script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="jquery-weui/js/jquery-weui.min.js"></script>
+<script type="text/javascript" src="jquery-weui/js/swiper.min.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+<script type="text/javascript">
+
+
+//选择尺寸
+function selectSise(_this){
+    $(_this).siblings().removeClass('active');
+    $(_this).addClass('active');
+}
+
+//选择颜色
+function selectColor(_this){
+    $(_this).siblings().removeClass('active');
+    $(_this).addClass('active');
+}
+
+
+// 计数器减
+function min(_this) {
+    var count=parseInt($(_this).siblings('input').val());//数量
+    // 如果数量小于等于1再点击减号，则删除此预订
+    if (count<=1) {
+        return;
+    }
+    count--;
+    $(_this).siblings('input').val(count);
+}
+
+
+// 计数器加
+function add(_this) {
+    var count=parseInt($(_this).siblings('input').val());//数量
+    count++;
+    $(_this).siblings('input').val(count);
+}
+
+
+// 点击预订
+function submitBtn(){
+    $.toast("预订成功", "text");
+}
+</script>
+</body>
+</html>
